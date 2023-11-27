@@ -14,6 +14,14 @@
 		B52F81222AE81A11007625BB /* Manual_PhotographerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F81212AE81A11007625BB /* Manual_PhotographerTests.swift */; };
 		B52F812C2AE81A11007625BB /* Manual_PhotographerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F812B2AE81A11007625BB /* Manual_PhotographerUITests.swift */; };
 		B52F812E2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */; };
+		B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */; };
+		B5556E512B142B34003C39B9 /* CookieClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E502B142B34003C39B9 /* CookieClicker.swift */; };
+		B5556E542B142B72003C39B9 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E532B142B72003C39B9 /* Cookie.swift */; };
+		B5556E562B142BA3003C39B9 /* ChickenFedora.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E552B142BA3003C39B9 /* ChickenFedora.swift */; };
+		B56716292B0D13FC00D2385E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56716282B0D13FC00D2385E /* UIKit.framework */; platformFilter = ios; settings = {ATTRIBUTES = (Required, ); }; };
+		B567162B2B0D142400D2385E /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162A2B0D142400D2385E /* CameraSession.swift */; };
+		B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162C2B0D163300D2385E /* CameraPreview.swift */; };
+		B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56716302B1427E100D2385E /* RepresentedCamPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +53,14 @@
 		B52F81272AE81A11007625BB /* Manual PhotographerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Manual PhotographerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52F812B2AE81A11007625BB /* Manual_PhotographerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerUITests.swift; sourceTree = "<group>"; };
 		B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickenClicker.swift; sourceTree = "<group>"; };
+		B5556E502B142B34003C39B9 /* CookieClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieClicker.swift; sourceTree = "<group>"; };
+		B5556E532B142B72003C39B9 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		B5556E552B142BA3003C39B9 /* ChickenFedora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickenFedora.swift; sourceTree = "<group>"; };
+		B56716282B0D13FC00D2385E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		B567162A2B0D142400D2385E /* CameraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSession.swift; sourceTree = "<group>"; };
+		B567162C2B0D163300D2385E /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		B56716302B1427E100D2385E /* RepresentedCamPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedCamPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56716292B0D13FC00D2385E /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +96,7 @@
 				B52F81202AE81A11007625BB /* Manual PhotographerTests */,
 				B52F812A2AE81A11007625BB /* Manual PhotographerUITests */,
 				B52F810D2AE81A10007625BB /* Products */,
+				B56716272B0D13FB00D2385E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +115,9 @@
 			children = (
 				B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */,
 				B52F81112AE81A10007625BB /* ContentView.swift */,
+				B5556E4F2B142AF5003C39B9 /* CameraAPI */,
+				B5556E572B142C51003C39B9 /* Clickers */,
+				B5556E522B142B53003C39B9 /* Images */,
 				B52F81132AE81A11007625BB /* Assets.xcassets */,
 				B52F81152AE81A11007625BB /* Manual_Photographer.entitlements */,
 				B52F81162AE81A11007625BB /* Preview Content */,
@@ -127,6 +148,42 @@
 				B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */,
 			);
 			path = "Manual PhotographerUITests";
+			sourceTree = "<group>";
+		};
+		B5556E4F2B142AF5003C39B9 /* CameraAPI */ = {
+			isa = PBXGroup;
+			children = (
+				B567162A2B0D142400D2385E /* CameraSession.swift */,
+				B567162C2B0D163300D2385E /* CameraPreview.swift */,
+				B56716302B1427E100D2385E /* RepresentedCamPreview.swift */,
+			);
+			path = CameraAPI;
+			sourceTree = "<group>";
+		};
+		B5556E522B142B53003C39B9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B5556E532B142B72003C39B9 /* Cookie.swift */,
+				B5556E552B142BA3003C39B9 /* ChickenFedora.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		B5556E572B142C51003C39B9 /* Clickers */ = {
+			isa = PBXGroup;
+			children = (
+				B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */,
+				B5556E502B142B34003C39B9 /* CookieClicker.swift */,
+			);
+			path = Clickers;
+			sourceTree = "<group>";
+		};
+		B56716272B0D13FB00D2385E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B56716282B0D13FC00D2385E /* UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +316,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5556E512B142B34003C39B9 /* CookieClicker.swift in Sources */,
+				B5556E542B142B72003C39B9 /* Cookie.swift in Sources */,
 				B52F81122AE81A10007625BB /* ContentView.swift in Sources */,
+				B5556E562B142BA3003C39B9 /* ChickenFedora.swift in Sources */,
+				B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */,
+				B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */,
+				B567162B2B0D142400D2385E /* CameraSession.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,
+				B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +488,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Manual Photographer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos and videos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone to record audio for videos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app would like to store and access photos.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,6 +531,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Manual Photographer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos and videos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone to record audio for videos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app would like to store and access photos.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
