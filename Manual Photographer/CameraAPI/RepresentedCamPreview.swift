@@ -13,7 +13,11 @@ struct RepresentedCamPreview: UIViewRepresentable {
     typealias UIViewType = CameraPreview
     
     func makeUIView(context: Context) -> CameraPreview {
-        let view = CameraPreview()
+        //let view = CameraPreview()
+        
+        let session = CameraSession()
+        session.configureSession()
+        let view = session.previewView
         
         return view
     }
