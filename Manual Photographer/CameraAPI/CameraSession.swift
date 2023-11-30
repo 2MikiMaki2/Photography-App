@@ -13,6 +13,7 @@ import Photos
 class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
+    let photoOutput = AVCapturePhotoOutput()
     var previewView = CameraPreview()
     
     func configureSession() {
@@ -29,7 +30,6 @@ class CameraSession: UIViewController {
         print("Inputs configured")
         
         // Configure outputs
-        let photoOutput = AVCapturePhotoOutput()
         guard captureSession.canAddOutput(photoOutput) else { return }
         captureSession.sessionPreset = .photo
         captureSession.addOutput(photoOutput)
@@ -47,6 +47,13 @@ class CameraSession: UIViewController {
         self.captureSession.startRunning()
         print("Session running")
         
+    }
+    
+    func capturePhoto() {
+        let photoSettings = AVCapturePhotoSettings()
+        let photoDelegate = CapturePhotoDelegate()
+        
+        self.photoOutput.capturePhoto(with: photoSettings, delegate: photoDelegate)
     }
     
 }

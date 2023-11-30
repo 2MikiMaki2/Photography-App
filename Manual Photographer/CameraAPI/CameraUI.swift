@@ -5,14 +5,24 @@
 //  Created by Maksim on 11/29/23.
 //
 
+import Foundation
+import UIKit
 import SwiftUI
 
 struct CameraUI: View {
+    let session = CameraSession()
+    @State private var animate = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            RepresentedCamPreview(session: session)
+            
+            Button {
+                animate.toggle()
+                //session.capturePhoto()
+            } label: {
+                Image(systemName: "camera.circle.fill")
+            }.symbolEffect(.bounce, value: animate).font(.largeTitle).padding(.bottom, 60)
+        }
     }
-}
-
-#Preview {
-    CameraUI()
 }

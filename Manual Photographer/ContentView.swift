@@ -13,7 +13,7 @@ struct ContentView: View {
             ChickenClicker().tabItem { Image(systemName: "photo.stack")
             }
             
-            RepresentedCamPreview().tabItem {
+            CameraUI().tabItem {
                 Image(systemName: "camera")
                 }
             
