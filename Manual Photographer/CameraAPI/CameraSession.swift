@@ -49,11 +49,21 @@ class CameraSession: UIViewController {
         
     }
     
+    //TODO: Create separate func for photo settings
+    // so that settings may be customizable
+    //TODO: Figure out how to run on separate thread/queue
     func capturePhoto() {
         let photoSettings = AVCapturePhotoSettings()
         let photoDelegate = CapturePhotoDelegate()
         
         self.photoOutput.capturePhoto(with: photoSettings, delegate: photoDelegate)
+    }
+    
+    //TODO: Give photoSettings a uniqueID
+    //TODO: Choose data format
+    func configurePhotoSettings() -> AVCapturePhotoSettings {
+        let photoSettings = AVCapturePhotoSettings()
+        
     }
     
 }

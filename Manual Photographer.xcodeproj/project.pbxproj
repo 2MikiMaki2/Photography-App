@@ -65,6 +65,7 @@
 		B567162A2B0D142400D2385E /* CameraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSession.swift; sourceTree = "<group>"; };
 		B567162C2B0D163300D2385E /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		B56716302B1427E100D2385E /* RepresentedCamPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedCamPreview.swift; sourceTree = "<group>"; };
+		B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Manual-Photographer-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 		B52F810E2AE81A10007625BB /* Manual Photographer */ = {
 			isa = PBXGroup;
 			children = (
+				B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */,
 				B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */,
 				B52F81112AE81A10007625BB /* ContentView.swift */,
 				B5556E4F2B142AF5003C39B9 /* CameraAPI */,
@@ -494,8 +496,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Manual Photographer/Preview Content\"";
 				DEVELOPMENT_TEAM = 3MX8P8XZCZ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Manual-Photographer-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Manual Photographer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos and videos.";
@@ -537,8 +541,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Manual Photographer/Preview Content\"";
 				DEVELOPMENT_TEAM = 3MX8P8XZCZ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Manual-Photographer-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Manual Photographer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos and videos.";

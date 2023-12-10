@@ -22,7 +22,7 @@ struct CameraUI: View {
                 //session.capturePhoto()
             } label: {
                 Image(systemName: "camera.circle.fill")
-            }.symbolEffect(.bounce, value: animate).font(.largeTitle).padding(.bottom, 60)
+            }.symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animate).font(.largeTitle).padding(.bottom, 60)
         }
     }
 }
