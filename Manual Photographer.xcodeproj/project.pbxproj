@@ -14,7 +14,7 @@
 		B52F81222AE81A11007625BB /* Manual_PhotographerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F81212AE81A11007625BB /* Manual_PhotographerTests.swift */; };
 		B52F812C2AE81A11007625BB /* Manual_PhotographerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F812B2AE81A11007625BB /* Manual_PhotographerUITests.swift */; };
 		B52F812E2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */; };
-		B554C6BE2B184BAF000B5031 /* CapturePhotoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554C6BD2B184BAF000B5031 /* CapturePhotoDelegate.swift */; };
+		B554C6BE2B184BAF000B5031 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554C6BD2B184BAF000B5031 /* PhotoCaptureProcessor.swift */; };
 		B554C6C02B184F79000B5031 /* CameraUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554C6BF2B184F79000B5031 /* CameraUI.swift */; };
 		B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */; };
 		B5556E512B142B34003C39B9 /* CookieClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E502B142B34003C39B9 /* CookieClicker.swift */; };
@@ -55,7 +55,7 @@
 		B52F81272AE81A11007625BB /* Manual PhotographerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Manual PhotographerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52F812B2AE81A11007625BB /* Manual_PhotographerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerUITests.swift; sourceTree = "<group>"; };
 		B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B554C6BD2B184BAF000B5031 /* CapturePhotoDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoDelegate.swift; sourceTree = "<group>"; };
+		B554C6BD2B184BAF000B5031 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		B554C6BF2B184F79000B5031 /* CameraUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUI.swift; sourceTree = "<group>"; };
 		B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickenClicker.swift; sourceTree = "<group>"; };
 		B5556E502B142B34003C39B9 /* CookieClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieClicker.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B567162A2B0D142400D2385E /* CameraSession.swift */,
-				B554C6BD2B184BAF000B5031 /* CapturePhotoDelegate.swift */,
+				B554C6BD2B184BAF000B5031 /* PhotoCaptureProcessor.swift */,
 				B567162C2B0D163300D2385E /* CameraPreview.swift */,
 				B56716302B1427E100D2385E /* RepresentedCamPreview.swift */,
 				B554C6BF2B184F79000B5031 /* CameraUI.swift */,
@@ -331,7 +331,7 @@
 				B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */,
 				B554C6C02B184F79000B5031 /* CameraUI.swift in Sources */,
 				B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */,
-				B554C6BE2B184BAF000B5031 /* CapturePhotoDelegate.swift in Sources */,
+				B554C6BE2B184BAF000B5031 /* PhotoCaptureProcessor.swift in Sources */,
 				B567162B2B0D142400D2385E /* CameraSession.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,
 				B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */,

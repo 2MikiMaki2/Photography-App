@@ -18,11 +18,11 @@ struct CameraUI: View {
             RepresentedCamPreview(session: session)
             
             Button {
+                session.capturePhoto()
                 animate.toggle()
-                //session.capturePhoto()
             } label: {
                 Image(systemName: "camera.circle.fill")
-            }.symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animate).font(.largeTitle).padding(.bottom, 60)
+            }.symbolRenderingMode(.monochrome).symbolEffect(.bounce, value: animate).font(.largeTitle).padding(.bottom, 60)
         }
     }
 }

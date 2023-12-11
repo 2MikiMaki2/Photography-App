@@ -14,6 +14,8 @@ class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
+    var photoDelegate = CapturePhotoDelegate()
+    private let sessionQueue = DispatchQueue(label: "session queue")
     var previewView = CameraPreview()
     
     func configureSession() {
@@ -30,7 +32,10 @@ class CameraSession: UIViewController {
         print("Inputs configured")
         
         // Configure outputs
-        guard captureSession.canAddOutput(photoOutput) else { return }
+        guard captureSession.canAddOutput(photoOutput) else {
+            print("Could not add photo output to session")
+            return
+        }
         captureSession.sessionPreset = .photo
         captureSession.addOutput(photoOutput)
         print("Outputs configured")
@@ -39,30 +44,41 @@ class CameraSession: UIViewController {
         captureSession.commitConfiguration()
         
         // Connect session to preview
-        //previewView.session = captureSession
         self.previewView.videoPreviewLayer.session = self.captureSession
-        print("Preview set")
+        print("Preview connected")
         
         // Run the session
-        self.captureSession.startRunning()
+        sessionQueue.async {
+            self.captureSession.startRunning()
+        }
         print("Session running")
         
     }
     
-    //TODO: Create separate func for photo settings
-    // so that settings may be customizable
-    //TODO: Figure out how to run on separate thread/queue
-    func capturePhoto() {
-        let photoSettings = AVCapturePhotoSettings()
-        let photoDelegate = CapturePhotoDelegate()
+    func configurePhotoSettings() -> AVCapturePhotoSettings {
+        print("photoSettings configured")
+        var photoSettings = AVCapturePhotoSettings()
         
-        self.photoOutput.capturePhoto(with: photoSettings, delegate: photoDelegate)
+        if self.photoOutput.availablePhotoCodecTypes.contains(AVVideoCodecType.hevc) {
+            photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            print(photoSettings)
+        }
+        
+        photoSettings.flashMode = .auto
+        
+        return photoSettings
+        
     }
     
-    //TODO: Give photoSettings a uniqueID
-    //TODO: Choose data format
-    func configurePhotoSettings() -> AVCapturePhotoSettings {
-        let photoSettings = AVCapturePhotoSettings()
+    func capturePhoto() {
+        sessionQueue.async {
+            print("Taking photo")
+            let photoSettings = self.configurePhotoSettings()
+            self.photoDelegate = CapturePhotoDelegate()
+            
+            print("sessionQueue.async running capturePhoto")
+            self.photoOutput.capturePhoto(with: photoSettings, delegate: self.photoDelegate)
+        }
         
     }
     
