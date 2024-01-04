@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import Photos
 
 class CapturePhotoDelegate: NSObject {
@@ -22,8 +23,8 @@ class CapturePhotoDelegate: NSObject {
             
             var isAuthorized = (status == .authorized)
             
-            print("Requesting access to library")
             if status == .notDetermined {
+                print("Requesting access to library")
                 isAuthorized = await PHPhotoLibrary.requestAuthorization(for: .readWrite) == .authorized
             }
             
@@ -66,10 +67,11 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
     }
 
     func savePhotoToLibrary(photo: AVCapturePhoto) async {
-        print("Attempting to save photo")
+        print("Saving photo")
         guard await isPhotoLibraryReadWriteAccessGranted() else { return }
         
         if let photoData = photo.fileDataRepresentation() {
+            // Check if album exists, create one if not, save to that album
             PHPhotoLibrary.shared().performChanges {
                 let creationRequest = PHAssetCreationRequest.forAsset()
                 creationRequest.addResource(with: .photo, data: photoData, options: nil)

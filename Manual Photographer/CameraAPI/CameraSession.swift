@@ -55,7 +55,7 @@ class CameraSession: UIViewController {
         
     }
     
-    func configurePhotoSettings() -> AVCapturePhotoSettings {
+    func configurePhotoSettings(isFlashOn: Bool) -> AVCapturePhotoSettings {
         print("photoSettings configured")
         var photoSettings = AVCapturePhotoSettings()
         
@@ -64,16 +64,15 @@ class CameraSession: UIViewController {
             print(photoSettings)
         }
         
-        photoSettings.flashMode = .auto
+        photoSettings.flashMode = isFlashOn ? AVCaptureDevice.FlashMode.on : AVCaptureDevice.FlashMode.off
         
         return photoSettings
         
     }
     
-    func capturePhoto() {
+    func capturePhoto(photoSettings: AVCapturePhotoSettings) {
         sessionQueue.async {
             print("Taking photo")
-            let photoSettings = self.configurePhotoSettings()
             self.photoDelegate = CapturePhotoDelegate()
             
             print("sessionQueue.async running capturePhoto")

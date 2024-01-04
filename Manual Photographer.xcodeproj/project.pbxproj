@@ -24,6 +24,9 @@
 		B567162B2B0D142400D2385E /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162A2B0D142400D2385E /* CameraSession.swift */; };
 		B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162C2B0D163300D2385E /* CameraPreview.swift */; };
 		B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56716302B1427E100D2385E /* RepresentedCamPreview.swift */; };
+		B5F7D1092B28C3380081133A /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D1082B28C3380081133A /* PhotoLibrary.swift */; };
+		B5F7D10B2B28C35A0081133A /* PhotoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */; };
+		B5F7D10E2B3A6CF40081133A /* PhotoLibraryDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		B567162C2B0D163300D2385E /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		B56716302B1427E100D2385E /* RepresentedCamPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedCamPreview.swift; sourceTree = "<group>"; };
 		B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Manual-Photographer-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B5F7D1082B28C3380081133A /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
+		B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreview.swift; sourceTree = "<group>"; };
+		B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,7 @@
 				B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */,
 				B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */,
 				B52F81112AE81A10007625BB /* ContentView.swift */,
+				B5F7D10C2B28C3600081133A /* PhotoLibraryUI */,
 				B5556E4F2B142AF5003C39B9 /* CameraAPI */,
 				B5556E572B142C51003C39B9 /* Clickers */,
 				B5556E522B142B53003C39B9 /* Images */,
@@ -192,6 +199,16 @@
 				B56716282B0D13FC00D2385E /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B5F7D10C2B28C3600081133A /* PhotoLibraryUI */ = {
+			isa = PBXGroup;
+			children = (
+				B5F7D1082B28C3380081133A /* PhotoLibrary.swift */,
+				B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */,
+				B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */,
+			);
+			path = PhotoLibraryUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,9 +345,12 @@
 				B5556E542B142B72003C39B9 /* Cookie.swift in Sources */,
 				B52F81122AE81A10007625BB /* ContentView.swift in Sources */,
 				B5556E562B142BA3003C39B9 /* ChickenFedora.swift in Sources */,
+				B5F7D1092B28C3380081133A /* PhotoLibrary.swift in Sources */,
+				B5F7D10E2B3A6CF40081133A /* PhotoLibraryDisplay.swift in Sources */,
 				B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */,
 				B554C6C02B184F79000B5031 /* CameraUI.swift in Sources */,
 				B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */,
+				B5F7D10B2B28C35A0081133A /* PhotoPreview.swift in Sources */,
 				B554C6BE2B184BAF000B5031 /* PhotoCaptureProcessor.swift in Sources */,
 				B567162B2B0D142400D2385E /* CameraSession.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,

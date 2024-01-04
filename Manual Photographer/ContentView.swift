@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         TabView {
-            ChickenClicker().tabItem { Image(systemName: "photo.stack")
+            PhotoLibraryDisplay().tabItem {
+                Image(systemName: "photo.stack")
             }
             
             CameraUI().tabItem {
@@ -24,6 +26,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
