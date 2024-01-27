@@ -19,7 +19,7 @@ struct ContentView: View {
                 Image(systemName: "camera")
                 }
             
-            CookieClicker().tabItem {
+            UserSettings().tabItem {
                 Image(systemName: "person")
             }
         }

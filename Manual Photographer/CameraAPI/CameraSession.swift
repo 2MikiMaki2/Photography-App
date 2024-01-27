@@ -10,6 +10,7 @@ import AVFoundation
 import UIKit
 import Photos
 
+//TODO: AVCaptureDevice is key to manual control of exposure; see Configuring Exposure Manually
 class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
@@ -18,14 +19,12 @@ class CameraSession: UIViewController {
     private let sessionQueue = DispatchQueue(label: "session queue")
     var previewView = CameraPreview()
     
-    func configureSession() {
+    func configureSession(videoDevice: AVCaptureDevice) {
         captureSession.beginConfiguration()
-        let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                  for: .video, position: .unspecified)
         
         // Configure inputs
         guard
-            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
             captureSession.canAddInput(videoDeviceInput)
             else { return }
         captureSession.addInput(videoDeviceInput)
@@ -56,7 +55,6 @@ class CameraSession: UIViewController {
     }
     
     func configurePhotoSettings(isFlashOn: Bool) -> AVCapturePhotoSettings {
-        print("photoSettings configured")
         var photoSettings = AVCapturePhotoSettings()
         
         if self.photoOutput.availablePhotoCodecTypes.contains(AVVideoCodecType.hevc) {
@@ -66,6 +64,7 @@ class CameraSession: UIViewController {
         
         photoSettings.flashMode = isFlashOn ? AVCaptureDevice.FlashMode.on : AVCaptureDevice.FlashMode.off
         
+        print("photoSettings configured")
         return photoSettings
         
     }

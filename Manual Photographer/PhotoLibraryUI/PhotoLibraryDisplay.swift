@@ -10,7 +10,7 @@ import SwiftUI
 // Takes data from PhotoLibrary and turns it into a view
 struct PhotoLibraryDisplay: View {
     var body: some View {
-        Text("Hello world")
+        Text("")
     }
 }
 

@@ -24,6 +24,8 @@
 		B567162B2B0D142400D2385E /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162A2B0D142400D2385E /* CameraSession.swift */; };
 		B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162C2B0D163300D2385E /* CameraPreview.swift */; };
 		B56716312B1427E100D2385E /* RepresentedCamPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56716302B1427E100D2385E /* RepresentedCamPreview.swift */; };
+		B5B0B3AD2B519F4A001BA492 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0B3AC2B519F4A001BA492 /* UserPermissions.swift */; };
+		B5B0B3AF2B51A689001BA492 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0B3AE2B51A689001BA492 /* UserSettings.swift */; };
 		B5F7D1092B28C3380081133A /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D1082B28C3380081133A /* PhotoLibrary.swift */; };
 		B5F7D10B2B28C35A0081133A /* PhotoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */; };
 		B5F7D10E2B3A6CF40081133A /* PhotoLibraryDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */; };
@@ -69,6 +71,8 @@
 		B567162C2B0D163300D2385E /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		B56716302B1427E100D2385E /* RepresentedCamPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedCamPreview.swift; sourceTree = "<group>"; };
 		B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Manual-Photographer-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B5B0B3AC2B519F4A001BA492 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
+		B5B0B3AE2B51A689001BA492 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		B5F7D1082B28C3380081133A /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreview.swift; sourceTree = "<group>"; };
 		B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryDisplay.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				B56E448B2B1D9C270024B150 /* Manual-Photographer-Info.plist */,
 				B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */,
 				B52F81112AE81A10007625BB /* ContentView.swift */,
+				B5B0B3AB2B519E1F001BA492 /* UserSettingsUI */,
 				B5F7D10C2B28C3600081133A /* PhotoLibraryUI */,
 				B5556E4F2B142AF5003C39B9 /* CameraAPI */,
 				B5556E572B142C51003C39B9 /* Clickers */,
@@ -199,6 +204,15 @@
 				B56716282B0D13FC00D2385E /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B5B0B3AB2B519E1F001BA492 /* UserSettingsUI */ = {
+			isa = PBXGroup;
+			children = (
+				B5B0B3AC2B519F4A001BA492 /* UserPermissions.swift */,
+				B5B0B3AE2B51A689001BA492 /* UserSettings.swift */,
+			);
+			path = UserSettingsUI;
 			sourceTree = "<group>";
 		};
 		B5F7D10C2B28C3600081133A /* PhotoLibraryUI */ = {
@@ -353,6 +367,8 @@
 				B5F7D10B2B28C35A0081133A /* PhotoPreview.swift in Sources */,
 				B554C6BE2B184BAF000B5031 /* PhotoCaptureProcessor.swift in Sources */,
 				B567162B2B0D142400D2385E /* CameraSession.swift in Sources */,
+				B5B0B3AD2B519F4A001BA492 /* UserPermissions.swift in Sources */,
+				B5B0B3AF2B51A689001BA492 /* UserSettings.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,
 				B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */,
 			);
