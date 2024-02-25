@@ -71,10 +71,11 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
         guard await isPhotoLibraryReadWriteAccessGranted() else { return }
         
         if let photoData = photo.fileDataRepresentation() {
-            let assetCollection = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [""], options: nil).firstObject!
+            guard let photoImage = UIImage(data: photoData) else { return }
+            let assetCollection = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [PhotoLibrary.albumLocation], options: nil).firstObject!
             // Save photo to the album
             PHPhotoLibrary.shared().performChanges {
-                let creationRequest = PHAssetCreationRequest.forAsset()
+                let creationRequest = PHAssetCreationRequest.creationRequestForAsset(from: photoImage)
                 let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
                 addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
                 
@@ -82,6 +83,7 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
             } completionHandler: { success, error in
                 if let error {
                     print("Error saving photo: \(error.localizedDescription)")
+                    print(error)
                     return
                 }
             }
