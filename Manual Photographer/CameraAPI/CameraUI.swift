@@ -31,7 +31,7 @@ struct CameraUI: View {
                 Button {
                     animateDevice.toggle()
                 } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
+                    Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
                 }.foregroundStyle(.white)
             }
             

@@ -6,11 +6,21 @@
 //
 
 import SwiftUI
+import Photos
+import PhotosUI
 
 // Takes data from PhotoLibrary and turns it into a view
 struct PhotoLibraryDisplay: View {
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    var photos = PhotoLibrary()
+    
     var body: some View {
-        Text("")
+        
+        LazyVGrid(columns: columns) {
+            ForEach(photos.getPhotos()) { photo in
+                Image(uiImage: photo.value)
+            }
+        }
     }
 }
 
