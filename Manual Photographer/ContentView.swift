@@ -17,7 +17,7 @@ struct ContentView: View {
             
             CameraUI().tabItem {
                 Image(systemName: "camera")
-                }
+            }
             
             UserSettings().tabItem {
                 Image(systemName: "person")

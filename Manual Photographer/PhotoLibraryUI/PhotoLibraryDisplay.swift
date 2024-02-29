@@ -15,10 +15,17 @@ struct PhotoLibraryDisplay: View {
     @Binding var photos: [PhotoLibrary.AlbumPhoto]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(photos) { photo in
-                    Image(uiImage: photo.value)
+        VStack {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(photos) { photo in
+                        Image(uiImage: photo.value)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .clipped()
+                            .aspectRatio(1, contentMode: .fit)
+                    }
                 }
             }
         }

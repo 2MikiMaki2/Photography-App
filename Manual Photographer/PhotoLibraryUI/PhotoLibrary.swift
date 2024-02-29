@@ -22,7 +22,7 @@ class PhotoLibrary {
         let value: UIImage
     }
     
-    //TODO: Somehow I coded it so that it doesn't add if one photo taken, have to take two photos
+    //TODO: Somehow as album is filled it somehow exponentially grows in number of items
     static func getPhotos() -> [AlbumPhoto] {
         checkAlbum()
         updateAlbum()
@@ -35,6 +35,7 @@ class PhotoLibrary {
         return albumLocation
     }
     
+    //TODO: Could be a problem with how this func fetches thumbnails
     static func getAssetThumbnail(asset: PHAsset) -> UIImage {
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
@@ -45,7 +46,6 @@ class PhotoLibrary {
             print(info as Any)
         })
         
-        print(thumbnail)
         return thumbnail
     }
     
@@ -83,6 +83,7 @@ class PhotoLibrary {
     
     static func updateAlbum() {
         if checkAssetCollection() {
+            album = []
             let assetCollection = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [albumLocation], options: nil).firstObject
             if (assetCollection != nil) {
                 let fetchResult = PHAsset.fetchAssets(in: assetCollection!, options: nil)
@@ -91,6 +92,7 @@ class PhotoLibrary {
                     let photo = AlbumPhoto(value: getAssetThumbnail(asset: fetchResult.object(at: index)))
                     album.append(photo)
                     print("Added photo to PhotoLibrary album")
+                    print("Size of album immediately  after album.append: \(album.count)")
                 }
             }
         }
