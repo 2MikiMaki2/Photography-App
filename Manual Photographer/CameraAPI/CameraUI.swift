@@ -30,6 +30,8 @@ struct CameraUI: View {
                 //TODO: Press to toggle camera device between .front and .back
                 Button {
                     animateDevice.toggle()
+                    print("animateDevice is: \(animateDevice)")
+                    session.switchCamera(frontOrBack: animateDevice)
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
                 }.foregroundStyle(.white)

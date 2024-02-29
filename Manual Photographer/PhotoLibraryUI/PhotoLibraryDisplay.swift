@@ -12,13 +12,14 @@ import PhotosUI
 // Takes data from PhotoLibrary and turns it into a view
 struct PhotoLibraryDisplay: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    //var photos = PhotoLibrary()
+    @Binding var photos: [PhotoLibrary.AlbumPhoto]
     
     var body: some View {
-        
-        LazyVGrid(columns: columns) {
-            ForEach(PhotoLibrary.getPhotos()) { photo in
-                Image(uiImage: photo.value)
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(photos) { photo in
+                    Image(uiImage: photo.value)
+                }
             }
         }
     }

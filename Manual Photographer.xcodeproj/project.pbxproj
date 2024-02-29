@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B51FCEE82B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FCEE72B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift */; };
 		B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */; };
 		B52F81122AE81A10007625BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F81112AE81A10007625BB /* ContentView.swift */; };
 		B52F81142AE81A11007625BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52F81132AE81A11007625BB /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B51FCEE72B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedPhotoLibrary.swift; sourceTree = "<group>"; };
 		B52F810C2AE81A10007625BB /* Manual Photographer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Manual Photographer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52F810F2AE81A10007625BB /* Manual_PhotographerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerApp.swift; sourceTree = "<group>"; };
 		B52F81112AE81A10007625BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				B5F7D1082B28C3380081133A /* PhotoLibrary.swift */,
 				B5F7D10A2B28C35A0081133A /* PhotoPreview.swift */,
 				B5F7D10D2B3A6CF40081133A /* PhotoLibraryDisplay.swift */,
+				B51FCEE72B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift */,
 			);
 			path = PhotoLibraryUI;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				B5B0B3AF2B51A689001BA492 /* UserSettings.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,
 				B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */,
+				B51FCEE82B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

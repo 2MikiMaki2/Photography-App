@@ -11,7 +11,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            PhotoLibraryDisplay().tabItem {
+            RepresentedPhotoLibrary().tabItem {
                 Image(systemName: "photo.stack")
             }
             

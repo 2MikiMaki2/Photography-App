@@ -69,9 +69,11 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
     func savePhotoToLibrary(photo: AVCapturePhoto) async {
         print("Saving photo")
         guard await isPhotoLibraryReadWriteAccessGranted() else { return }
+        PhotoLibrary.checkAlbum()
         
         if let photoData = photo.fileDataRepresentation() {
             guard let photoImage = UIImage(data: photoData) else { return }
+            print("albumLocation in PhotoCaptureProcessor after calling checkAlbum(): \(PhotoLibrary.albumLocation)")
             let assetCollection = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [PhotoLibrary.albumLocation], options: nil).firstObject!
             // Save photo to the album
             PHPhotoLibrary.shared().performChanges {
@@ -88,6 +90,9 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
                 }
             }
         }
+        
+        PhotoLibrary.updateAlbum()
+        print("Updated album, new size wrt PhotoCaptureProcessor: \(PhotoLibrary.getPhotos().count)")
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishRecordingLivePhotoMovieForEventualFileAt outputFileURL: URL, resolvedSettings: AVCaptureResolvedPhotoSettings) {

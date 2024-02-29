@@ -15,6 +15,8 @@ class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
+    var frontCameraDeviceInput: AVCaptureDeviceInput?
+    var backCameraDeviceInput: AVCaptureDeviceInput?
     var photoDelegate = CapturePhotoDelegate()
     private let sessionQueue = DispatchQueue(label: "session queue")
     var previewView = CameraPreview()
@@ -28,6 +30,7 @@ class CameraSession: UIViewController {
             captureSession.canAddInput(videoDeviceInput)
             else { return }
         captureSession.addInput(videoDeviceInput)
+        print(videoDevice)
         print("Inputs configured")
         
         // Configure outputs
@@ -43,6 +46,7 @@ class CameraSession: UIViewController {
         captureSession.commitConfiguration()
         
         // Connect session to preview
+        previewView = CameraPreview()
         self.previewView.videoPreviewLayer.session = self.captureSession
         print("Preview connected")
         
@@ -70,6 +74,8 @@ class CameraSession: UIViewController {
     }
     
     func capturePhoto(photoSettings: AVCapturePhotoSettings) {
+        print(previewView)
+        
         sessionQueue.async {
             print("Taking photo")
             self.photoDelegate = CapturePhotoDelegate()
@@ -78,6 +84,29 @@ class CameraSession: UIViewController {
             self.photoOutput.capturePhoto(with: photoSettings, delegate: self.photoDelegate)
         }
         
+    }
+    
+    func switchCamera(frontOrBack: Bool) {
+        print("Switching camera")
+        let frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+        let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+
+        frontCameraDeviceInput = try? AVCaptureDeviceInput(device: frontCamera!)
+        backCameraDeviceInput = try? AVCaptureDeviceInput(device: backCamera!)
+        
+        captureSession.beginConfiguration()
+        
+        if frontOrBack {
+            print("Switching to front camera")
+            captureSession.removeInput(captureSession.inputs.first!)
+            captureSession.addInput(frontCameraDeviceInput!)
+        } else if !frontOrBack {
+            print("Switching to back camera")
+            captureSession.removeInput(captureSession.inputs.first!)
+            captureSession.addInput(backCameraDeviceInput!)
+        }
+        
+        captureSession.commitConfiguration()
     }
     
 }

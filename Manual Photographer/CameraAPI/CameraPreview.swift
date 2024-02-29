@@ -21,6 +21,4 @@ class CameraPreview: UIView {
         return layer as! AVCaptureVideoPreviewLayer
     }
     
-    
-    
 }
