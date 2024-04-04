@@ -17,7 +17,7 @@ struct RepresentedCamPreview: UIViewRepresentable {
     
     func makeUIView(context: Context) -> CameraPreview {
         
-        session.configureSession(videoDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!)
+        session.configureSession(exposureTime: CMTimeMake(value: 0, timescale: 0))
         
         let view = session.previewView
         

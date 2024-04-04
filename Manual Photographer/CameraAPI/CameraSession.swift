@@ -15,22 +15,27 @@ class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
+    var currentCameraDevice: AVCaptureDevice?
     var frontCameraDeviceInput: AVCaptureDeviceInput?
     var backCameraDeviceInput: AVCaptureDeviceInput?
     var photoDelegate = CapturePhotoDelegate()
     private let sessionQueue = DispatchQueue(label: "session queue")
     var previewView = CameraPreview()
     
-    func configureSession(videoDevice: AVCaptureDevice) {
+    func configureSession(exposureTime: CMTime) {
+        print("Configuring session")
         captureSession.beginConfiguration()
+        
+        currentCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        //configureExposureTime(exposureTime: exposureTime)
         
         // Configure inputs
         guard
-            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
+        let videoDeviceInput = try? AVCaptureDeviceInput(device: currentCameraDevice!),
             captureSession.canAddInput(videoDeviceInput)
             else { return }
         captureSession.addInput(videoDeviceInput)
-        print(videoDevice)
+        print(currentCameraDevice!)
         print("Inputs configured")
         
         // Configure outputs
@@ -73,17 +78,34 @@ class CameraSession: UIViewController {
         
     }
     
-    func capturePhoto(photoSettings: AVCapturePhotoSettings) {
+    func capturePhoto(photoSettings: AVCapturePhotoSettings, exposureTime: CMTime) {
         print(previewView)
         
         sessionQueue.async {
             print("Taking photo")
             self.photoDelegate = CapturePhotoDelegate()
+            //self.configureExposureTime(exposureTime: exposureTime)
             
             print("sessionQueue.async running capturePhoto")
+            print("Exposure time: \(exposureTime)")
             self.photoOutput.capturePhoto(with: photoSettings, delegate: self.photoDelegate)
         }
         
+    }
+    
+    func configureExposureTime(exposureTime: CMTime) {
+        do {
+            try currentCameraDevice?.lockForConfiguration()
+        } catch {
+            print("Error occurred locking device for configuration")
+        }
+        
+        if (exposureTime >= (currentCameraDevice?.activeFormat.minExposureDuration)! && exposureTime <= (currentCameraDevice?.activeFormat.maxExposureDuration)!) {
+            print("exposureTime within limits")
+            currentCameraDevice?.setExposureModeCustom(duration: exposureTime, iso: (currentCameraDevice?.activeFormat.minISO)!)
+        }
+        
+        currentCameraDevice?.unlockForConfiguration()
     }
     
     func switchCamera(frontOrBack: Bool) {

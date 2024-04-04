@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct RotaryDial: View {
+struct RotaryDial<Element>: View {
     private let scale: CGFloat = 275
-    let valueScale: CGFloat
     private let indicatorLength: CGFloat = 25
-    let maxValue: CGFloat
-    let stepSize: CGFloat
+    let valueSet: Array<Element>
     
-    @State private var value: CGFloat = 0
+    @State var value: Element
     @State private var rotation: CGFloat = 0
     
     private var innerScale: CGFloat {
@@ -33,28 +31,32 @@ struct RotaryDial: View {
         return degrees
     }
     
-    private func calcValue(between starting: CGPoint, ending: CGPoint) -> CGFloat {
-        let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
-        let radians = atan2(center.y, center.x)
-        var newValue = 90 + (radians * 180 / .pi)
+    private func calcValue(angle: CGFloat) -> Element {
+        var valueIndex = Int(angle) / 10
         
-        if (newValue > maxValue) {
-            newValue = 0
+        if (valueIndex > valueSet.count - 1) {
+            valueIndex = valueSet.count - 1
         }
         
-        return newValue
+        if (valueIndex < 0) {
+            valueIndex = 0
+        }
+        
+        return valueSet[valueIndex]
+    }
+    
+    //TODO: Why return wrong number?
+    func getValue() -> Element {
+        print("Dial value: \(self.value)")
+        return self.value
     }
     
     var body: some View {
         ZStack {
-            Cookie()
-            
             Circle()
-                .stroke(Color(.white), style: StrokeStyle(lineWidth: 25, lineCap: .butt, lineJoin: .miter, dash: [4]))
                 .fill(Color(.black))
-                .rotationEffect(.degrees(self.rotation))
-                .frame(width: 275, height: 275, alignment: .center)
                 .opacity(0.4)
+                .frame(width: 290, height: 290, alignment: .center)
                 .gesture(
                     DragGesture().onChanged() { value in
                         let x: CGFloat = min(max(value.location.x, 0), self.innerScale)
@@ -64,16 +66,21 @@ struct RotaryDial: View {
                         let start = CGPoint(x: (self.innerScale) / 2, y: (self.innerScale) / 2)
 
                         let angle = self.angle(between: start, ending: ending)
-                        self.rotation = angle / 10
-                        self.value = self.calcValue(between: start, ending: ending)
+                        self.rotation = angle / 3
+                        self.value = self.calcValue(angle: angle)
                     }
                 )
             
-            Text("\(self.value)").font(.title)
+            Circle()
+                .stroke(Color(.white), style: StrokeStyle(lineWidth: 15, lineCap: .butt, lineJoin: .miter, dash: [6, 23.18]))
+                .rotationEffect(.degrees(self.rotation))
+                .frame(width: 275, height: 275, alignment: .center)
+                
+            Text("\(self.value)").font(.title).offset(x: 0.0, y: -70.0)
         }
     }
 }
 
 #Preview {
-    RotaryDial(valueScale: 100.0, maxValue: 32, stepSize: 0.5)
+    RotaryDial<CGFloat>(valueSet: [1.0/8000.0, 1.0/4000.0, 1.0/2000.0, 1.0/1000.0, 1.0/500.0, 1.0/250.0, 1.0, 2.0, 4.0, 8.0, 15.0, 30.0, 60.0], value: 0.0)
 }
