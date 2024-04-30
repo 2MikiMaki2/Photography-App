@@ -78,7 +78,7 @@ class CameraSession: UIViewController {
         
     }
     
-    func capturePhoto(photoSettings: AVCapturePhotoSettings, exposureTime: CMTime) {
+    func capturePhoto(photoSettings: AVCapturePhotoSettings) {
         print(previewView)
         
         sessionQueue.async {
@@ -87,7 +87,7 @@ class CameraSession: UIViewController {
             //self.configureExposureTime(exposureTime: exposureTime)
             
             print("sessionQueue.async running capturePhoto")
-            print("Exposure time: \(exposureTime)")
+            //print("Exposure time: \(exposureTime)")
             self.photoOutput.capturePhoto(with: photoSettings, delegate: self.photoDelegate)
         }
         
@@ -97,7 +97,7 @@ class CameraSession: UIViewController {
         do {
             try currentCameraDevice?.lockForConfiguration()
         } catch {
-            print("Error occurred locking device for configuration")
+            print("Error occurred locking device for exposure configuration")
         }
         
         if (exposureTime >= (currentCameraDevice?.activeFormat.minExposureDuration)! && exposureTime <= (currentCameraDevice?.activeFormat.maxExposureDuration)!) {
@@ -106,6 +106,18 @@ class CameraSession: UIViewController {
         }
         
         currentCameraDevice?.unlockForConfiguration()
+    }
+    
+    func configureZoom(magnification: CGFloat) {
+        do {
+            try currentCameraDevice?.lockForConfiguration()
+        } catch {
+            print("Error occurred locking device for zoom configuration")
+        }
+        
+        if (magnification <= currentCameraDevice!.activeFormat.videoMaxZoomFactor) {
+            currentCameraDevice!.ramp(toVideoZoomFactor: magnification, withRate: 2.0)
+        }
     }
     
     func switchCamera(frontOrBack: Bool) {

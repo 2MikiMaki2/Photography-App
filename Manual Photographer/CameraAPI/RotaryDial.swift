@@ -31,7 +31,7 @@ struct RotaryDial<Element>: View {
         return degrees
     }
     
-    private func calcValue(angle: CGFloat) -> Element {
+    private func calcValue(angle: CGFloat) {
         var valueIndex = Int(angle) / 10
         
         if (valueIndex > valueSet.count - 1) {
@@ -42,12 +42,12 @@ struct RotaryDial<Element>: View {
             valueIndex = 0
         }
         
-        return valueSet[valueIndex]
+        self.value = valueSet[valueIndex]
     }
     
     //TODO: Why return wrong number?
     func getValue() -> Element {
-        print("Dial value: \(self.value)")
+        print("getValue: \(String(describing: self.value))")
         return self.value
     }
     
@@ -58,16 +58,18 @@ struct RotaryDial<Element>: View {
                 .opacity(0.4)
                 .frame(width: 290, height: 290, alignment: .center)
                 .gesture(
-                    DragGesture().onChanged() { value in
-                        let x: CGFloat = min(max(value.location.x, 0), self.innerScale)
-                        let y: CGFloat = min(max(value.location.y, 0), self.innerScale)
+                    DragGesture().onChanged() { pos in
+                        let x: CGFloat = min(max(pos.location.x, 0), self.innerScale)
+                        let y: CGFloat = min(max(pos.location.y, 0), self.innerScale)
 
                         let ending = CGPoint(x: x, y: y)
                         let start = CGPoint(x: (self.innerScale) / 2, y: (self.innerScale) / 2)
 
                         let angle = self.angle(between: start, ending: ending)
                         self.rotation = angle / 3
-                        self.value = self.calcValue(angle: angle)
+                        //value = self.calcValue(angle: angle)
+                        self.calcValue(angle: angle)
+                        print("Value within dial: \(String(describing: self.value))")
                     }
                 )
             
@@ -76,11 +78,11 @@ struct RotaryDial<Element>: View {
                 .rotationEffect(.degrees(self.rotation))
                 .frame(width: 275, height: 275, alignment: .center)
                 
-            Text("\(self.value)").font(.title).offset(x: 0.0, y: -70.0)
+            Text("\(String(describing: self.value))").font(.title).offset(x: 0.0, y: -70.0)
         }
     }
 }
 
 #Preview {
-    RotaryDial<CGFloat>(valueSet: [1.0/8000.0, 1.0/4000.0, 1.0/2000.0, 1.0/1000.0, 1.0/500.0, 1.0/250.0, 1.0, 2.0, 4.0, 8.0, 15.0, 30.0, 60.0], value: 0.0)
+    RotaryDial<CGFloat>(valueSet: [1.0/8000.0, 1.0/4000.0, 1.0/2000.0, 1.0/1000.0, 1.0/500.0, 1.0/250.0, 1.0, 2.0, 4.0, 8.0, 15.0, 30.0, 60.0], value: 1.0)
 }

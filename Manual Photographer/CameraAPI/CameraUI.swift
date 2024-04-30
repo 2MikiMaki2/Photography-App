@@ -17,7 +17,23 @@ struct CameraUI: View {
     @State private var animateFlash = false
     @State private var animateDevice = false
     
-    @State private var exposureDial = RotaryDial<CMTime>(valueSet: [CMTimeMake(value: 1, timescale: 8000), CMTimeMake(value: 1, timescale: 4000), CMTimeMake(value: 1, timescale: 2000), CMTimeMake(value: 1, timescale: 1000), CMTimeMake(value: 1, timescale: 500), CMTimeMake(value: 1, timescale: 250), CMTimeMake(value: 1, timescale: 1)], value: CMTimeMake(value: 1, timescale: 1))
+    @GestureState private var magnifyBy = 1.0
+
+
+    var magnification: some Gesture {
+        MagnifyGesture()
+            .updating($magnifyBy) { value, gestureState, transaction in
+                gestureState = value.magnification
+            }
+            .onChanged() { value in
+                session.configureZoom(magnification: value.magnification)
+            }
+            .onEnded() { value in
+                session.currentCameraDevice!.cancelVideoZoomRamp()
+            }
+        }
+    
+//    @State private var exposureDial: RotaryDial = RotaryDial<CMTime>(valueSet: [CMTimeMake(value: 1, timescale: 8000), CMTimeMake(value: 1, timescale: 4000), CMTimeMake(value: 1, timescale: 2000), CMTimeMake(value: 1, timescale: 1000), CMTimeMake(value: 1, timescale: 500), CMTimeMake(value: 1, timescale: 250), CMTimeMake(value: 1, timescale: 1)], value: CMTimeMake(value: 1, timescale: 1))
     
     var body: some View {
         VStack {
@@ -36,26 +52,26 @@ struct CameraUI: View {
                     Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
                 }.foregroundStyle(.white)
                 
-                Button {
-                    session.configureExposureTime(exposureTime: exposureDial.getValue())
-                    //session.configureSession(exposureTime: exposureDial.getValue())
-                } label: {
-                    Image(systemName: "sun.max").font(.largeTitle)
-                }.foregroundStyle(.white)
+//                Button {
+//                    session.configureExposureTime(exposureTime: exposureDial.value)
+//                    //session.configureSession(exposureTime: exposureDial.getValue())
+//                } label: {
+//                    Image(systemName: "sun.max").font(.largeTitle)
+//                }.foregroundStyle(.white)
             }
             
             ZStack {
                 RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
+                    .gesture(magnification)
                 
-                exposureDial.offset(x: 0.0, y: 50.0)
+                //exposureDial.offset(x: 0.0, y: 300.0)
             }
             
             HStack {
                 Button {
                     animateCapture.toggle()
                     let captureSettings = session.configurePhotoSettings(isFlashOn: animateFlash)
-                    //TODO: Why does exposureDial.getValue() not return right thing?
-                    session.capturePhoto(photoSettings: captureSettings, exposureTime: exposureDial.getValue())
+                    session.capturePhoto(photoSettings: captureSettings)
                 } label: {
                     Image(systemName: "camera.shutter.button").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateCapture).font(.largeTitle).padding(.bottom, 60)
                 }.foregroundStyle(.white)
