@@ -16,8 +16,7 @@ class CameraSession: UIViewController {
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
     var currentCameraDevice: AVCaptureDevice?
-    var frontCameraDeviceInput: AVCaptureDeviceInput?
-    var backCameraDeviceInput: AVCaptureDeviceInput?
+    var currentCameraDeviceInput: AVCaptureDeviceInput?
     var photoDelegate = CapturePhotoDelegate()
     private let sessionQueue = DispatchQueue(label: "session queue")
     var previewView = CameraPreview()
@@ -116,29 +115,26 @@ class CameraSession: UIViewController {
         }
         
         if (magnification <= currentCameraDevice!.activeFormat.videoMaxZoomFactor) {
-            currentCameraDevice!.ramp(toVideoZoomFactor: magnification, withRate: 2.0)
+            if (magnification > 1) {
+                currentCameraDevice!.ramp(toVideoZoomFactor: magnification, withRate: 10.0)
+            } else {
+                currentCameraDevice!.ramp(toVideoZoomFactor: 1.0, withRate: 10.0)
+            }
         }
+        
+        currentCameraDevice!.unlockForConfiguration()
     }
     
-    func switchCamera(frontOrBack: Bool) {
+    //TODO: Make switchTo that takes camera device and switches to it
+    func switchCamera(newDevice: AVCaptureDevice) {
         print("Switching camera")
-        let frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-        let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
 
-        frontCameraDeviceInput = try? AVCaptureDeviceInput(device: frontCamera!)
-        backCameraDeviceInput = try? AVCaptureDeviceInput(device: backCamera!)
+        currentCameraDeviceInput = try? AVCaptureDeviceInput(device: newDevice)
         
         captureSession.beginConfiguration()
         
-        if frontOrBack {
-            print("Switching to front camera")
-            captureSession.removeInput(captureSession.inputs.first!)
-            captureSession.addInput(frontCameraDeviceInput!)
-        } else if !frontOrBack {
-            print("Switching to back camera")
-            captureSession.removeInput(captureSession.inputs.first!)
-            captureSession.addInput(backCameraDeviceInput!)
-        }
+        captureSession.removeInput(captureSession.inputs.first!)
+        captureSession.addInput(currentCameraDeviceInput!)
         
         captureSession.commitConfiguration()
     }
