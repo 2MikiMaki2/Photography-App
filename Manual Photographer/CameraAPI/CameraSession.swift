@@ -125,7 +125,20 @@ class CameraSession: UIViewController {
         currentCameraDevice!.unlockForConfiguration()
     }
     
-    //TODO: Make switchTo that takes camera device and switches to it
+    func configureLensPostion(lensPosition: Float) {
+        do {
+            try currentCameraDevice?.lockForConfiguration()
+        } catch {
+            print("Error occurred locking device for focus configuration")
+        }
+        
+        currentCameraDevice!.setFocusModeLocked(lensPosition: lensPosition) {
+          (timestamp:CMTime) -> Void in
+        }
+        
+        currentCameraDevice!.unlockForConfiguration()
+    }
+    
     func switchCamera(newDevice: AVCaptureDevice) {
         print("Switching camera")
 

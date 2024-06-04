@@ -17,6 +17,9 @@ struct CameraUI: View {
     @State private var animateFlash = false
     @State private var animateDevice = false
     @State private var animateLense = false
+    @State private var animateSlider = false
+    @State private var focalLength = 0.5
+    @State private var isEditing = false
     
     @GestureState private var magnifyBy = 1.0
 
@@ -39,6 +42,12 @@ struct CameraUI: View {
     var body: some View {
         VStack {
             HStack {
+                Button {
+                    isEditing.toggle()
+                } label: {
+                    Image(systemName: "slider.horizontal.below.rectangle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateSlider).font(.largeTitle)
+                }.foregroundStyle(.white)
+                
                 Button {
                     animateFlash.toggle()
                 } label: {
@@ -85,6 +94,7 @@ struct CameraUI: View {
                 }.foregroundStyle(.white)
             }
             
+            
             ZStack {
                 RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
                     .gesture(magnification)
@@ -92,14 +102,26 @@ struct CameraUI: View {
                 //exposureDial.offset(x: 0.0, y: 300.0)
             }
             
-            HStack {
-                Button {
-                    animateCapture.toggle()
-                    let captureSettings = session.configurePhotoSettings(isFlashOn: animateFlash)
-                    session.capturePhoto(photoSettings: captureSettings)
-                } label: {
-                    Image(systemName: "camera.shutter.button").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateCapture).font(.largeTitle).padding(.bottom, 60)
-                }.foregroundStyle(.white)
+            VStack {
+                HStack {
+                    Button {
+                        animateCapture.toggle()
+                        let captureSettings = session.configurePhotoSettings(isFlashOn: animateFlash)
+                        session.capturePhoto(photoSettings: captureSettings)
+                    } label: {
+                        Image(systemName: "camera.shutter.button").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateCapture).font(.largeTitle).padding(.bottom, 60)
+                    }.foregroundStyle(.white)
+                }
+                
+                HStack {
+                    Text("\(focalLength)")
+                    
+                    Slider (
+                        value: $focalLength,
+                        in: 0.0...1.0) { editing in
+                            session.configureLensPostion(lensPosition: Float(focalLength))
+                        }
+                }.opacity(isEditing ? 0.0 : 1.0)
             }
         }
     }
