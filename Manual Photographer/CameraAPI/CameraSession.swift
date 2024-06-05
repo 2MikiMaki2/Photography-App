@@ -139,6 +139,19 @@ class CameraSession: UIViewController {
         currentCameraDevice!.unlockForConfiguration()
     }
     
+    func configureFocusPoint(focusPoint: CGPoint) {
+        do {
+            try currentCameraDevice?.lockForConfiguration()
+        } catch {
+            print("Error occurred locking device for focus configuration")
+        }
+        
+        currentCameraDevice!.focusPointOfInterest = focusPoint
+        currentCameraDevice!.focusMode = .autoFocus
+        
+        currentCameraDevice!.unlockForConfiguration()
+    }
+    
     func switchCamera(newDevice: AVCaptureDevice) {
         print("Switching camera")
 

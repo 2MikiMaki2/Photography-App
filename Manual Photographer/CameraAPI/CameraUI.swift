@@ -13,16 +13,17 @@ import AVFoundation
 struct CameraUI: View {
     let session = CameraSession()
     
+    //SO MANY!!! Is there a way to reduce?
     @State private var animateCapture = false
     @State private var animateFlash = false
     @State private var animateDevice = false
     @State private var animateLense = false
     @State private var animateSlider = false
     @State private var focalLength = 0.5
-    @State private var isEditing = false
+    @State private var isEditingFocus = false
     
     @GestureState private var magnifyBy = 1.0
-
+    @GestureState private var interestPoint = CGPoint()
 
     var magnification: some Gesture {
         MagnifyGesture()
@@ -35,15 +36,23 @@ struct CameraUI: View {
 //            .onEnded() { value in
 //                session.currentCameraDevice!.cancelVideoZoomRamp()
 //            }
-        }
+    }
     
-//    @State private var exposureDial: RotaryDial = RotaryDial<CMTime>(valueSet: [CMTimeMake(value: 1, timescale: 8000), CMTimeMake(value: 1, timescale: 4000), CMTimeMake(value: 1, timescale: 2000), CMTimeMake(value: 1, timescale: 1000), CMTimeMake(value: 1, timescale: 500), CMTimeMake(value: 1, timescale: 250), CMTimeMake(value: 1, timescale: 1)], value: CMTimeMake(value: 1, timescale: 1))
+    var focusTap: some Gesture {
+        SpatialTapGesture(count: 1)
+            .updating($interestPoint) { value, gestureState, transaction in
+                gestureState = value.location
+            }
+            .onEnded() { event in
+                session.configureFocusPoint(focusPoint: event.location)
+            }
+    }
     
     var body: some View {
         VStack {
             HStack {
                 Button {
-                    isEditing.toggle()
+                    isEditingFocus.toggle()
                 } label: {
                     Image(systemName: "slider.horizontal.below.rectangle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateSlider).font(.largeTitle)
                 }.foregroundStyle(.white)
@@ -97,7 +106,7 @@ struct CameraUI: View {
             
             ZStack {
                 RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
-                    .gesture(magnification)
+                    .gesture(magnification).gesture(focusTap)
                 
                 //exposureDial.offset(x: 0.0, y: 300.0)
             }
@@ -111,17 +120,17 @@ struct CameraUI: View {
                     } label: {
                         Image(systemName: "camera.shutter.button").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateCapture).font(.largeTitle).padding(.bottom, 60)
                     }.foregroundStyle(.white)
-                }
+                }.offset(x: 0.0, y: 30.0)
                 
                 HStack {
                     Text("\(focalLength)")
-                    
+                        
                     Slider (
                         value: $focalLength,
                         in: 0.0...1.0) { editing in
                             session.configureLensPostion(lensPosition: Float(focalLength))
                         }
-                }.opacity(isEditing ? 0.0 : 1.0)
+                }.opacity(isEditingFocus ? 0.0 : 1.0)
             }
         }
     }
