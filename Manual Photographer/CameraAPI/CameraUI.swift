@@ -13,7 +13,6 @@ import AVFoundation
 struct CameraUI: View {
     let session = CameraSession()
     
-    //SO MANY!!! Is there a way to reduce?
     @State private var animateCapture = false
     @State private var animateFlash = false
     @State private var animateDevice = false
@@ -33,9 +32,6 @@ struct CameraUI: View {
             .onChanged() { value in
                 session.configureZoom(magnification: value.magnification)
             }
-//            .onEnded() { value in
-//                session.currentCameraDevice!.cancelVideoZoomRamp()
-//            }
     }
     
     var focusTap: some Gesture {
@@ -74,13 +70,6 @@ struct CameraUI: View {
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
                 }.foregroundStyle(.white)
-                
-//                Button {
-//                    session.configureExposureTime(exposureTime: exposureDial.value)
-//                    //session.configureSession(exposureTime: exposureDial.getValue())
-//                } label: {
-//                    Image(systemName: "sun.max").font(.largeTitle)
-//                }.foregroundStyle(.white)
             }
             
             HStack {
@@ -107,8 +96,6 @@ struct CameraUI: View {
             ZStack {
                 RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
                     .gesture(magnification).gesture(focusTap)
-                
-                //exposureDial.offset(x: 0.0, y: 300.0)
             }
             
             VStack {

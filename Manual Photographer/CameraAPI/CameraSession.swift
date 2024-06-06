@@ -10,7 +10,6 @@ import AVFoundation
 import UIKit
 import Photos
 
-//TODO: AVCaptureDevice is key to manual control of exposure; see Configuring Exposure Manually
 class CameraSession: UIViewController {
     
     let captureSession = AVCaptureSession()
