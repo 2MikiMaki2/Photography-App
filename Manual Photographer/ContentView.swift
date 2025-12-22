@@ -19,9 +19,9 @@ struct ContentView: View {
                 Image(systemName: "camera")
             }
             
-            UserSettings().tabItem {
-                Image(systemName: "person")
-            }
+//            UserSettings().tabItem {
+//                Image(systemName: "person")
+//            }
         }
     }
 }

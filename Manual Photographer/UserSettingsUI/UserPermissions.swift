@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: Implement toggle of permissions
 struct UserPermissions: View {
     @State var allowCameraAccess: Bool = false
     @State var allowRollAccess: Bool = false

@@ -140,5 +140,10 @@ struct CameraUI: View {
                 }
             }
         }
+        .onAppear {
+            Task {
+                await UserSettings.checkCameraPermission()
+            }
+        }
     }
 }

@@ -25,7 +25,10 @@ struct RepresentedPhotoLibrary: View {
         }
         .onAppear {
             Task {
-                photos = await PhotoLibrary.getPhotos()
+                let granted = await UserSettings.checkReadWritePermission()
+                if (granted) {
+                    photos = await PhotoLibrary.getPhotos()
+                }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: PhotoLibrary.albumDidUpdateNotification)) { _ in
