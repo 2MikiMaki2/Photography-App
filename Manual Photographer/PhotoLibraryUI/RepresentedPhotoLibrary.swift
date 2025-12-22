@@ -24,7 +24,9 @@ struct RepresentedPhotoLibrary: View {
             PhotoLibraryDisplay(photos: $photos)
         }
         .onAppear {
-            photos = PhotoLibrary.getPhotos()
+            Task {
+                photos = await PhotoLibrary.getPhotos()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: PhotoLibrary.albumDidUpdateNotification)) { _ in
             animateRefresh.toggle()

@@ -23,10 +23,10 @@ class PhotoLibrary {
         let value: UIImage
     }
     
-    static func getPhotos() -> [AlbumPhoto] {
-        checkAlbum()
+    static func getPhotos() async -> [AlbumPhoto] {
+        await checkAlbumAsync()
         updateAlbum()
-        
+
         return album
     }
     
@@ -47,40 +47,30 @@ class PhotoLibrary {
         return thumbnail
     }
     
-    static func checkAlbum() {
-        if (albumLocation == "") {
-            print("Making album in PhotoLibrary")
-            PHPhotoLibrary.shared().performChanges {
-                let assetRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: "Manual Photographer")
-                let assetPlaceholder = assetRequest.placeholderForCreatedAssetCollection
-                albumLocation += assetPlaceholder.localIdentifier
-                print("localIdentifier after making album: \(assetPlaceholder.localIdentifier)")
-                print("albumLocation in checkAlbum(): \(albumLocation)")
-            } completionHandler: { success, error in
-                if let error {
-                    print("Error making album: \(error.localizedDescription)")
-                    return
-                }
-            }
-        } else {
-            print("albumLocation already exists")
-        }
-    }
-
     static func checkAlbumAsync() async {
         if (albumLocation == "") {
-            print("Making album in PhotoLibrary")
-            do {
-                try await PHPhotoLibrary.shared().performChanges {
-                    let assetRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: "Manual Photographer")
-                    let assetPlaceholder = assetRequest.placeholderForCreatedAssetCollection
-                    albumLocation += assetPlaceholder.localIdentifier
-                    print("localIdentifier after making album: \(assetPlaceholder.localIdentifier)")
-                    print("albumLocation in checkAlbum(): \(albumLocation)")
+            // Check if album already exists
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.predicate = NSPredicate(format: "title = %@", "Manual Photographer")
+            let existingAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+
+            if let existingAlbum = existingAlbums.firstObject {
+                albumLocation = existingAlbum.localIdentifier
+                print("Found existing Manual Photographer album: \(albumLocation)")
+            } else {
+                print("Making album in PhotoLibrary")
+                do {
+                    try await PHPhotoLibrary.shared().performChanges {
+                        let assetRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: "Manual Photographer")
+                        let assetPlaceholder = assetRequest.placeholderForCreatedAssetCollection
+                        albumLocation += assetPlaceholder.localIdentifier
+                        print("localIdentifier after making album: \(assetPlaceholder.localIdentifier)")
+                        print("albumLocation in checkAlbum(): \(albumLocation)")
+                    }
+                    print("Album created successfully")
+                } catch {
+                    print("Error making album: \(error.localizedDescription)")
                 }
-                print("Album created successfully")
-            } catch {
-                print("Error making album: \(error.localizedDescription)")
             }
         } else {
             print("albumLocation already exists")
