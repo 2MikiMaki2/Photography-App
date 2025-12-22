@@ -20,8 +20,16 @@ struct RepresentedPhotoLibrary: View {
             } label: {
                 Image(systemName: "arrow.clockwise.circle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateRefresh).font(.largeTitle)
             }.foregroundStyle(.white)
-            
+
             PhotoLibraryDisplay(photos: $photos)
+        }
+        .onAppear {
+            photos = PhotoLibrary.getPhotos()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: PhotoLibrary.albumDidUpdateNotification)) { _ in
+            animateRefresh.toggle()
+            print("Automatically refreshing RepresentedPhotoLibrary")
+            photos = PhotoLibrary.album
         }
     }
 }

@@ -17,10 +17,6 @@
 		B52F812E2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */; };
 		B554C6BE2B184BAF000B5031 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554C6BD2B184BAF000B5031 /* PhotoCaptureProcessor.swift */; };
 		B554C6C02B184F79000B5031 /* CameraUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554C6BF2B184F79000B5031 /* CameraUI.swift */; };
-		B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */; };
-		B5556E512B142B34003C39B9 /* CookieClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E502B142B34003C39B9 /* CookieClicker.swift */; };
-		B5556E542B142B72003C39B9 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E532B142B72003C39B9 /* Cookie.swift */; };
-		B5556E562B142BA3003C39B9 /* ChickenFedora.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5556E552B142BA3003C39B9 /* ChickenFedora.swift */; };
 		B56716292B0D13FC00D2385E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56716282B0D13FC00D2385E /* UIKit.framework */; platformFilter = ios; settings = {ATTRIBUTES = (Required, ); }; };
 		B567162B2B0D142400D2385E /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162A2B0D142400D2385E /* CameraSession.swift */; };
 		B567162D2B0D163300D2385E /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567162C2B0D163300D2385E /* CameraPreview.swift */; };
@@ -65,10 +61,6 @@
 		B52F812D2AE81A11007625BB /* Manual_PhotographerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manual_PhotographerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B554C6BD2B184BAF000B5031 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		B554C6BF2B184F79000B5031 /* CameraUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUI.swift; sourceTree = "<group>"; };
-		B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickenClicker.swift; sourceTree = "<group>"; };
-		B5556E502B142B34003C39B9 /* CookieClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieClicker.swift; sourceTree = "<group>"; };
-		B5556E532B142B72003C39B9 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
-		B5556E552B142BA3003C39B9 /* ChickenFedora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickenFedora.swift; sourceTree = "<group>"; };
 		B56716282B0D13FC00D2385E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		B567162A2B0D142400D2385E /* CameraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSession.swift; sourceTree = "<group>"; };
 		B567162C2B0D163300D2385E /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
@@ -138,8 +130,6 @@
 				B5B0B3AB2B519E1F001BA492 /* UserSettingsUI */,
 				B5F7D10C2B28C3600081133A /* PhotoLibraryUI */,
 				B5556E4F2B142AF5003C39B9 /* CameraAPI */,
-				B5556E572B142C51003C39B9 /* Clickers */,
-				B5556E522B142B53003C39B9 /* Images */,
 				B52F81132AE81A11007625BB /* Assets.xcassets */,
 				B52F81152AE81A11007625BB /* Manual_Photographer.entitlements */,
 				B52F81162AE81A11007625BB /* Preview Content */,
@@ -183,24 +173,6 @@
 				B5CEE2D82BB5C92E00C6D676 /* RotaryDial.swift */,
 			);
 			path = CameraAPI;
-			sourceTree = "<group>";
-		};
-		B5556E522B142B53003C39B9 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				B5556E532B142B72003C39B9 /* Cookie.swift */,
-				B5556E552B142BA3003C39B9 /* ChickenFedora.swift */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		B5556E572B142C51003C39B9 /* Clickers */ = {
-			isa = PBXGroup;
-			children = (
-				B5556E4D2B142A7D003C39B9 /* ChickenClicker.swift */,
-				B5556E502B142B34003C39B9 /* CookieClicker.swift */,
-			);
-			path = Clickers;
 			sourceTree = "<group>";
 		};
 		B56716272B0D13FB00D2385E /* Frameworks */ = {
@@ -361,10 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5556E512B142B34003C39B9 /* CookieClicker.swift in Sources */,
-				B5556E542B142B72003C39B9 /* Cookie.swift in Sources */,
 				B52F81122AE81A10007625BB /* ContentView.swift in Sources */,
-				B5556E562B142BA3003C39B9 /* ChickenFedora.swift in Sources */,
 				B5CEE2D92BB5C92E00C6D676 /* RotaryDial.swift in Sources */,
 				B5F7D1092B28C3380081133A /* PhotoLibrary.swift in Sources */,
 				B5F7D10E2B3A6CF40081133A /* PhotoLibraryDisplay.swift in Sources */,
@@ -377,7 +346,6 @@
 				B5B0B3AD2B519F4A001BA492 /* UserPermissions.swift in Sources */,
 				B5B0B3AF2B51A689001BA492 /* UserSettings.swift in Sources */,
 				B52F81102AE81A10007625BB /* Manual_PhotographerApp.swift in Sources */,
-				B5556E4E2B142A7D003C39B9 /* ChickenClicker.swift in Sources */,
 				B51FCEE82B8DA96F0096CA8E /* RepresentedPhotoLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +441,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -526,6 +495,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

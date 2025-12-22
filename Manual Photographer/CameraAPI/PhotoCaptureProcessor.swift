@@ -69,30 +69,30 @@ extension CapturePhotoDelegate: AVCapturePhotoCaptureDelegate {
     func savePhotoToLibrary(photo: AVCapturePhoto) async {
         print("Saving photo")
         guard await isPhotoLibraryReadWriteAccessGranted() else { return }
-        PhotoLibrary.checkAlbum()
-        
+        print("checkAlbum called in CapturePhotoDelegate->savePhotoToLibrary")
+        await PhotoLibrary.checkAlbumAsync()
+
         if let photoData = photo.fileDataRepresentation() {
             guard let photoImage = UIImage(data: photoData) else { return }
             print("albumLocation in PhotoCaptureProcessor after calling checkAlbum(): \(PhotoLibrary.albumLocation)")
             let assetCollection = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [PhotoLibrary.albumLocation], options: nil).firstObject!
             // Save photo to the album
-            PHPhotoLibrary.shared().performChanges {
-                let creationRequest = PHAssetCreationRequest.creationRequestForAsset(from: photoImage)
-                let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
-                addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
-                
-                //creationRequest.addResource(with: .photo, data: photoData, options: nil)
-            } completionHandler: { success, error in
-                if let error {
-                    print("Error saving photo: \(error.localizedDescription)")
-                    print(error)
-                    return
+            do {
+                try await PHPhotoLibrary.shared().performChanges {
+                    let creationRequest = PHAssetCreationRequest.creationRequestForAsset(from: photoImage)
+                    let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
+                    addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
                 }
+                print("Photo saved successfully")
+
+                // NOW safe to update - photo is guaranteed to be saved!
+                PhotoLibrary.updateAlbum()
+
+            } catch {
+                print("Error saving photo: \(error.localizedDescription)")
+                print(error)
             }
         }
-        
-        PhotoLibrary.updateAlbum()
-        print("Updated album, new size wrt PhotoCaptureProcessor: \(PhotoLibrary.getPhotos().count)")
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishRecordingLivePhotoMovieForEventualFileAt outputFileURL: URL, resolvedSettings: AVCaptureResolvedPhotoSettings) {

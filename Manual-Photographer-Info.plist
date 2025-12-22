@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Manual Photographer needs access to your camera to take photos with manual controls for focus, exposure, and zoom.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Manual Photographer needs access to your photo library to save and display the photos you take with the app.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Manual Photographer needs permission to save photos you take to your photo library.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Manual Photographer may use your microphone for video recording features.</string>
+</dict>
 </plist>
