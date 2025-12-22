@@ -13,7 +13,8 @@ import PhotosUI
 struct PhotoLibraryDisplay: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @Binding var photos: [PhotoLibrary.AlbumPhoto]
-    
+    @State private var selectedPhoto: PhotoLibrary.AlbumPhoto?
+
     var body: some View {
         VStack {
             ScrollView {
@@ -25,9 +26,15 @@ struct PhotoLibraryDisplay: View {
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .clipped()
                             .aspectRatio(1, contentMode: .fit)
+                            .onTapGesture {
+                                selectedPhoto = photo
+                            }
                     }
                 }
             }
+        }
+        .sheet(item: $selectedPhoto) { photo in
+            PhotoPreview(photo: photo)
         }
     }
 }

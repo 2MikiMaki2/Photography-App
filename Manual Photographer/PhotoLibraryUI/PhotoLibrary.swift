@@ -20,7 +20,8 @@ class PhotoLibrary {
 
     public struct AlbumPhoto: Identifiable {
         let id = UUID()
-        let value: UIImage
+        let value: UIImage       // Thumbnail (100x100)
+        let asset: PHAsset       // Reference for full-res loading
     }
     
     static func getPhotos() async -> [AlbumPhoto] {
@@ -46,7 +47,26 @@ class PhotoLibrary {
         
         return thumbnail
     }
-    
+
+    static func getFullResolutionImage(asset: PHAsset) async -> UIImage? {
+        return await withCheckedContinuation { continuation in
+            let manager = PHImageManager.default()
+            let options = PHImageRequestOptions()
+            options.isSynchronous = false
+            options.deliveryMode = .highQualityFormat
+            options.isNetworkAccessAllowed = true  // For iCloud photos
+
+            manager.requestImage(
+                for: asset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .aspectFit,
+                options: options
+            ) { (image, info) in
+                continuation.resume(returning: image)
+            }
+        }
+    }
+
     static func checkAlbumAsync() async {
         if (albumLocation == "") {
             // Check if album already exists
@@ -101,7 +121,8 @@ class PhotoLibrary {
                 print("in updateAlbum fetchResult.count: \(fetchResult.count)")
                 for index in 0...(fetchResult.count - 1) {
                     print("Index in updateAlbum: \(index)")
-                    let photo = AlbumPhoto(value: getAssetThumbnail(asset: fetchResult.object(at: index)))
+                    let asset = fetchResult.object(at: index)
+                    let photo = AlbumPhoto(value: getAssetThumbnail(asset: asset), asset: asset)
                     album.append(photo)
                     print("Added photo to var album")
                     print("Size of album immediately  after album.append: \(album.count)")
