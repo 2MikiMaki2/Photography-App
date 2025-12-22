@@ -16,11 +16,17 @@ struct RepresentedCamPreview: UIViewRepresentable {
     var session: CameraSession
     
     func makeUIView(context: Context) -> CameraPreview {
-        
+
         session.configureSession(exposureTime: CMTimeMake(value: 0, timescale: 0))
-        
+
         let view = session.previewView
-        
+
+        // Configure view to expand and fill its container
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        // Configure preview layer to fill the view
+        view.videoPreviewLayer.videoGravity = .resizeAspectFill
+
         return view
     }
     

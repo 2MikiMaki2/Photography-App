@@ -45,79 +45,99 @@ struct CameraUI: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    isEditingFocus.toggle()
-                } label: {
-                    Image(systemName: "slider.horizontal.below.rectangle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateSlider).font(.largeTitle)
-                }.foregroundStyle(.white)
-                
-                Button {
-                    animateFlash.toggle()
-                } label: {
-                    Image(systemName: animateFlash ? "bolt.fill" : "bolt.slash.fill").symbolRenderingMode(.hierarchical).contentTransition(.symbolEffect(.replace.downUp)).font(.largeTitle)
-                }.foregroundStyle(.white)
-                
-                Button {
-                    animateDevice.toggle()
-                    print("animateDevice is: \(animateDevice)")
-                    if (animateDevice) {
-                        session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)!)
-                    } else {
-                        session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!)
-                    }
-                } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
-                }.foregroundStyle(.white)
-            }
-            
-            HStack {
-                Button {
-                    session.switchCamera(newDevice: AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back)!)
-                } label: {
-                    Image(systemName: "camera.macro.circle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
-                }.foregroundStyle(.white)
-                
-                Button {
-                    session.switchCamera(newDevice: AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back)!)
-                } label: {
-                    Image(systemName: "plus.viewfinder").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
-                }.foregroundStyle(.white)
-                
-                Button {
-                    session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!)
-                } label: {
-                    Image(systemName: "camera.circle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
-                }.foregroundStyle(.white)
-            }
-            
-            
-            ZStack {
-                RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
-                    .gesture(magnification).gesture(focusTap)
-            }
-            
+        ZStack {
+            RepresentedCamPreview(frontOrBack: $animateDevice, session: session)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+                .gesture(magnification)
+                .gesture(focusTap)
+
+            //Stack ordering top buttons and shutter button vertically
             VStack {
+                //Stack ordering top buttons horizontally
                 HStack {
-                    Button {
-                        animateCapture.toggle()
-                        let captureSettings = session.configurePhotoSettings(isFlashOn: animateFlash)
-                        session.capturePhoto(photoSettings: captureSettings)
-                    } label: {
-                        Image(systemName: "camera.shutter.button").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateCapture).font(.largeTitle).padding(.bottom, 60)
-                    }.foregroundStyle(.white)
-                }.offset(x: 0.0, y: 30.0)
-                
-                HStack {
-                    Text("\(focalLength)")
-                        
-                    Slider (
-                        value: $focalLength,
-                        in: 0.0...1.0) { editing in
-                            session.configureLensPostion(lensPosition: Float(focalLength))
+                    HStack {
+                        Button {
+                            isEditingFocus.toggle()
+                        } label: {
+                            Image(systemName: "slider.horizontal.below.rectangle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateSlider).font(.largeTitle)
+                        }.foregroundStyle(.white)
+
+                        Button {
+                            animateFlash.toggle()
+                        } label: {
+                            Image(systemName: animateFlash ? "bolt.fill" : "bolt.slash.fill").symbolRenderingMode(.hierarchical).contentTransition(.symbolEffect(.replace.downUp)).font(.largeTitle)
+                        }.foregroundStyle(.white)
+
+                        Button {
+                            animateDevice.toggle()
+                            print("animateDevice is: \(animateDevice)")
+                            if (animateDevice) {
+                                session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)!)
+                            } else {
+                                session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath.camera").symbolRenderingMode(.hierarchical).symbolEffect(.bounce.down, value: animateDevice).font(.largeTitle)
+                        }.foregroundStyle(.white)
+                    }
+
+                    Spacer()
+
+                    HStack {
+                        Button {
+                            session.switchCamera(newDevice: AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back)!)
+                        } label: {
+                            Image(systemName: "camera.macro.circle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
+                        }.foregroundStyle(.white)
+
+                        Button {
+                            session.switchCamera(newDevice: AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back)!)
+                        } label: {
+                            Image(systemName: "plus.viewfinder").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
+                        }.foregroundStyle(.white)
+
+                        Button {
+                            session.switchCamera(newDevice: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!)
+                        } label: {
+                            Image(systemName: "camera.circle").symbolRenderingMode(.hierarchical).symbolEffect(.bounce, value: animateLense).font(.largeTitle)
+                        }.foregroundStyle(.white)
+                    }
+                }
+
+                Spacer()
+
+                VStack {
+                    HStack {
+                        Button {
+                            animateCapture.toggle()
+                            let captureSettings = session.configurePhotoSettings(isFlashOn: animateFlash)
+                            session.capturePhoto(photoSettings: captureSettings)
+                        } label: {
+                            Image(systemName: "camera.circle.fill")
+                                .symbolRenderingMode(.monochrome)
+                                .symbolEffect(.bounce, value: animateCapture)
+                                .font(.system(size: 80))
+                                .foregroundStyle(.white)
                         }
-                }.opacity(isEditingFocus ? 0.0 : 1.0)
+                        .padding(.bottom, 10)
+                    }
+
+                    HStack {
+                        Text("\(focalLength * 10, specifier: "%.0f")")
+                            .padding(20)
+                            .background(Circle().fill(Color.black))
+                            .foregroundColor(.white)
+
+                        Slider (
+                            value: $focalLength,
+                            in: 0.0...1.0) { editing in
+                                session.configureLensPostion(lensPosition: Float(focalLength))
+                            }
+                    }
+                    .padding(.trailing, 20)
+                    .opacity(isEditingFocus ? 1.0 : 0.0)
+                }
             }
         }
     }
